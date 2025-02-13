@@ -47,6 +47,7 @@ class MainPage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 12,),
             ClipRRect(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(25),
