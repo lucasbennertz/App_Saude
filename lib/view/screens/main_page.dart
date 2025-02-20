@@ -14,6 +14,7 @@ class MainPage extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Image.asset("assets/images/Instant_SOS.png", height: 55,),
             Text("InstantSOS"),
             CircleAvatar()
           ],
