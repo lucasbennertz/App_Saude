@@ -10,8 +10,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MainPage(),
+    return MaterialApp(
+      home: const MainPage(),
+      initialRoute: '/',
+      routes: {
+        '/' : (context) => MainPage(),
+        
+      },
     );
   }
 }
