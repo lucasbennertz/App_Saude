@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:health_application/view/screens/logo_screen.dart';
 import 'package:health_application/view/screens/main_page.dart';
-
+import 'view/screens/caminho_class.dart';
 void main() {
-  runApp(const MainApp());
+  runApp( MainApp());
 }
-
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+  MainApp({super.key});
+  Telas telas = Telas();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const MainPage(),
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/' : (context) => MainPage(),
-        
+        telas.TELA_LOGO : (context) => LogoScreen(),
+        telas.TELA_INICIAL : (context) => MainPage()
       },
     );
   }

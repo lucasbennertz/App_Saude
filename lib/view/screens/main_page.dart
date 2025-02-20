@@ -14,7 +14,6 @@ class MainPage extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(onPressed: (){}, icon: Icon(Icons.toc)),
             Text("InstantSOS"),
             CircleAvatar()
           ],
