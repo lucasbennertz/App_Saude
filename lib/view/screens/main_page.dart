@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/controller/data.dart';
+import 'package:health_application/view/components/card_boas_vindas.dart';
 import 'package:health_application/view/components/card_saude.dart';
+import 'package:health_application/view/screens/caminho_class.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
   static Data dados = Data();
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,42 +15,16 @@ class MainPage extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset("assets/images/Instant_SOS.png", height: 55,),
+            Image.asset("assets/images/Instant_SOS.png", height: 55),
             Text("InstantSOS"),
-            CircleAvatar()
+            CircleAvatar(),
           ],
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFFDADCE0),
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                width: double.infinity,
-                height: 180,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text("Seja bem vindo ", style: TextStyle(fontSize: 20)),
-                          Text("Fulana(o)!", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                      Text("Em que podemos ajuda-lo hoje?"),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            CardBoasVindas(),
             SizedBox(height: 12),
             ClipRRect(
               borderRadius: BorderRadius.only(
@@ -68,11 +43,18 @@ class MainPage extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 20.0),
                     child: ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(), // Disables scrolling here since SingleChildScrollView already does it
-                      itemCount: dados.informacoes.length, // The length of the data list
+                      physics:
+                          NeverScrollableScrollPhysics(), // Disables scrolling here since SingleChildScrollView already does it
+                      itemCount:
+                          dados
+                              .informacoes
+                              .length, // The length of the data list
                       itemBuilder: (context, index) {
                         var info = dados.informacoes[index];
-                        return CardSaude(saude: info,); // Assuming you want to display each item in a custom card
+                        return CardSaude(
+                          saude: info,
+                          telas: Telas(),
+                        ); // Assuming you want to display each item in a custom card
                       },
                     ),
                   ),

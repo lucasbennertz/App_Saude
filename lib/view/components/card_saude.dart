@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/model/info_saude.dart';
+import 'package:health_application/view/screens/caminho_class.dart';
 
 class CardSaude extends StatelessWidget {
   final InfoSaude saude;
-
-  const CardSaude({required this.saude, super.key});
+  final Telas telas;
+  const CardSaude({required this.saude, required this.telas, super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // You can add a tap action here
-        print('Card tapped');
+        if (saude.idInfoSaude == 4) {
+          Navigator.of(context).pushNamed(telas.TELA_ENTRADA_DADOS);
+        }
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -47,10 +49,7 @@ class CardSaude extends StatelessWidget {
                     SizedBox(height: 4),
                     Text(
                       saude.descricao,
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: Colors.grey[600], fontSize: 14),
                     ),
                   ],
                 ),
