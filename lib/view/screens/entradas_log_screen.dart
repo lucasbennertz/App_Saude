@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EntradasLogScreen extends StatefulWidget {
-  EntradasLogScreen({super.key});
+  const EntradasLogScreen({super.key});
 
   @override
   State<EntradasLogScreen> createState() => _EntradasLogScreenState();
@@ -49,10 +49,17 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
                     labelText: "Insira sua altura",
                     focusColor: Color(0xFF7FB5AF),
                   ),
+                  validator: (value) {
+                    return null;
+                  
+                    
+                  },
                 ),
                 SizedBox(height: 12,),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    
+                  },
                   style: ButtonStyle(
                     padding: WidgetStateProperty.all(
                       EdgeInsets.symmetric(horizontal: 160),
