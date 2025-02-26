@@ -12,6 +12,7 @@ dependencies:
   path:
   path_provider:
   sqflite:  
+  intl:
 dev_dependencies:
   flutter_test:
     sdk: flutter

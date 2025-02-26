@@ -3,12 +3,13 @@ class InfoPeso {
   double peso;
   double altura;
   DateTime data = DateTime.now();
-  late double IMC;
+  late double IMC = 0;
 
   InfoPeso(this.peso, this.altura);
 
-  void calcularIMC() {
-    this.IMC = this.peso / (this.altura * this.altura);
+  double calcularIMC() {
+    IMC = peso / (altura * altura);
+    return IMC;
   }
 
   Map<String, dynamic> toMap(){
