@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_application/controller/database.dart';
 import 'package:health_application/controller/regras_validacao_form.dart';
 import 'package:health_application/model/info_peso.dart';
 import 'package:health_application/view/components/card_pesos.dart';
@@ -18,9 +19,24 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
   final TextEditingController _pesoController = TextEditingController();
   final TextEditingController _alturaController = TextEditingController();
 
-  // Lista de pesos (inicializada como vazia)
-  late List<InfoPeso> pesos = [];
 
+  DatabaseHelper banco = DatabaseHelper();
+  // Lista de pesos (inicializada como vazia)
+  late List<InfoPeso> pesos =  [];
+
+  @override
+  void initState(){
+    super.initState();
+    carregarPesos();
+  }
+
+  void carregarPesos() async{
+    pesos = await banco.getInfoPesos();
+    print("pesos carregados");
+    setState(() {
+      
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,9 +101,11 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
                     if (_formKey.currentState!.validate()) {
                       setState(() {
                         // Simulação de adição de dados à lista de pesos
-                        String numeroConvertido = _pesoController.text.replaceAll(",", ".");
-                        String numeroConvertido2 = _alturaController.text.replaceAll(",", ".");
-                        pesos.add(InfoPeso(double.parse(numeroConvertido), double.parse(numeroConvertido2)));
+                        double numeroConvertido = parseNumero(_pesoController.text);
+                        double numeroConvertido2 = parseNumero(_alturaController.text);
+                        var novoPeso = InfoPeso(numeroConvertido, numeroConvertido2);
+                        pesos.add(novoPeso);
+                        banco.insertInfoPeso(novoPeso);
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("Enviado com sucesso!")),
@@ -121,5 +139,8 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
     _pesoController.dispose();
     _alturaController.dispose();
     super.dispose();
+  }
+  double parseNumero(String valor){
+    return double.parse(valor.replaceAll(",", "."));
   }
 }

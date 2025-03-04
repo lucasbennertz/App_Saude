@@ -59,42 +59,10 @@ class DatabaseHelper {
       return InfoPeso(
         maps[i]['peso'],
         maps[i]['altura'],
-      )..pesoID = maps[i]['peso_id']
+      )
         ..IMC = maps[i]['IMC']
         ..data = DateTime.parse(maps[i]['data']);
     });
-  }
-
-  // Obter um InfoPeso pelo ID
-  Future<InfoPeso?> getInfoPesoById(int id) async {
-    final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(
-      'users',
-      where: 'peso_id = ?',
-      whereArgs: [id],
-    );
-
-    if (maps.isNotEmpty) {
-      return InfoPeso(
-        maps[0]['peso'],
-        maps[0]['altura'],
-      )..pesoID = maps[0]['peso_id']
-        ..IMC = maps[0]['IMC']
-        ..data = DateTime.parse(maps[0]['data']);
-    }
-
-    return null;
-  }
-
-  // Atualizar um InfoPeso
-  Future<int> updateInfoPeso(InfoPeso infoPeso) async {
-    final db = await database;
-    return await db.update(
-      'users',
-      infoPeso.toMap(),
-      where: 'peso_id = ?',
-      whereArgs: [infoPeso.pesoID],
-    );
   }
 
   // Excluir um InfoPeso
