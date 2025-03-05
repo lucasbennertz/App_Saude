@@ -59,7 +59,7 @@ class DatabaseHelper {
       return InfoPeso(
         maps[i]['peso'],
         maps[i]['altura'],
-      )
+      ) ..peso_ID = maps[i]['peso_id']
         ..IMC = maps[i]['IMC']
         ..data = DateTime.parse(maps[i]['data']);
     });

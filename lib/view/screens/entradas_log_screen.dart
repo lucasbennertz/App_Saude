@@ -118,8 +118,9 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
 
                 // Usando ListView.builder para exibir os dados
                 Container(
-                  height: 300, // Defina a altura fixa ou use MediaQuery para dinamicamente adaptar
+                  height: MediaQuery.of(context).size.height * 0.68, // Defina a altura fixa ou use MediaQuery para dinamicamente adaptar
                   child: ListView.builder(
+                    reverse: true,
                     itemCount: pesos.length,
                     itemBuilder: (context, index) {
                       return CardPesos(infoPeso: pesos[index]);

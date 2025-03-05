@@ -1,4 +1,5 @@
 class InfoPeso {
+  int? peso_ID = null;
   double peso;
   double altura;
   DateTime data = DateTime.now();
