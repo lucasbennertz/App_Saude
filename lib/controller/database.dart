@@ -66,7 +66,7 @@ class DatabaseHelper {
   }
 
   // Excluir um InfoPeso
-  Future<int> deleteInfoPeso(int id) async {
+  Future<int> deleteInfoPeso(int? id) async {
     final db = await database;
     return await db.delete(
       'users',

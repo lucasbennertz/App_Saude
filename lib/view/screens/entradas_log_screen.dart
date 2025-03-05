@@ -23,7 +23,6 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
   DatabaseHelper banco = DatabaseHelper();
   // Lista de pesos (inicializada como vazia)
   late List<InfoPeso> pesos =  [];
-
   @override
   void initState(){
     super.initState();
@@ -34,7 +33,7 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
     pesos = await banco.getInfoPesos();
     print("pesos carregados");
     setState(() {
-      
+    pesos = pesos.reversed.toList();
     });
   }
   @override
@@ -106,6 +105,7 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
                         var novoPeso = InfoPeso(numeroConvertido, numeroConvertido2);
                         pesos.add(novoPeso);
                         banco.insertInfoPeso(novoPeso);
+                        carregarPesos();
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("Enviado com sucesso!")),
@@ -120,10 +120,13 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.68, // Defina a altura fixa ou use MediaQuery para dinamicamente adaptar
                   child: ListView.builder(
-                    reverse: true,
                     itemCount: pesos.length,
                     itemBuilder: (context, index) {
-                      return CardPesos(infoPeso: pesos[index]);
+                      return CardPesos(infoPeso: pesos[index], banco: banco,  onDelete: (){
+                        setState(() {
+                          carregarPesos();
+                        });
+                      },);
                     },
                   ),
                 ),
