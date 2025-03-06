@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_application/view/screens/Infos_screens.dart';
+import 'package:health_application/view/screens/infos_screens.dart';
 import 'package:health_application/view/screens/entradas_log_screen.dart';
 import 'package:health_application/view/screens/logo_screen.dart';
 import 'package:health_application/view/screens/main_page.dart';
@@ -9,6 +9,7 @@ void main() {
   runApp(MainApp());
 }
 
+// ignore: must_be_immutable
 class MainApp extends StatelessWidget {
   MainApp({super.key});
   CaminhoClass caminhos = CaminhoClass();

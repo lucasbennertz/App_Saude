@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/model/info_saude.dart';
-import 'package:health_application/view/components/MyAppBar.dart';
+import 'package:health_application/view/components/my_app_bar.dart';
 import 'package:health_application/view/components/card_infos.dart';
 
 class InfosScreens extends StatelessWidget {
@@ -11,7 +11,6 @@ class InfosScreens extends StatelessWidget {
     // Extracting data passed via Navigator
     InfoSaude saude = ModalRoute.of(context)!.settings.arguments as InfoSaude;
     String saudeTitle = saude.nomeInfoSaude;
-    int saudeId = saude.idInfoSaude;
     List<String> saudePassos = saude.passos;
 
     return Scaffold(

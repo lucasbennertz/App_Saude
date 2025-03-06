@@ -42,7 +42,7 @@ class DatabaseHelper {
   // Inserir um novo InfoPeso no banco de dados
   Future<int> insertInfoPeso(InfoPeso infoPeso) async {
     final db = await database;
-    infoPeso.calcularIMC();
+    infoPeso.calcularimc();
     return await db.insert(
       'users',
       infoPeso.toMap(),
@@ -59,8 +59,8 @@ class DatabaseHelper {
       return InfoPeso(
         maps[i]['peso'],
         maps[i]['altura'],
-      ) ..peso_ID = maps[i]['peso_id']
-        ..IMC = maps[i]['IMC']
+      ) ..pesoID = maps[i]['peso_id']
+        ..imc = maps[i]['IMC']
         ..data = DateTime.parse(maps[i]['data']);
     });
   }

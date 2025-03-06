@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/controller/data.dart';
-import 'package:health_application/view/components/MyAppBar.dart';
+import 'package:health_application/view/components/my_app_bar.dart';
 import 'package:health_application/view/components/card_boas_vindas.dart';
 import 'package:health_application/view/components/card_saude.dart';
 import 'package:health_application/view/screens/caminho_class.dart';

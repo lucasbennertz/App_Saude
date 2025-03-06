@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class MyTextFormFieldWithDecorationForNumbers extends StatelessWidget {
   final String? Function(String?) validatorConstrutivo;
   final String titulo;
-  final TextEditingController FormController;
+  final TextEditingController formController;
   const MyTextFormFieldWithDecorationForNumbers({
     super.key,
     required this.validatorConstrutivo,
     required this.titulo,
-    required this.FormController
+    required this.formController
   });
 
   @override
@@ -22,7 +22,7 @@ class MyTextFormFieldWithDecorationForNumbers extends StatelessWidget {
         focusColor: const Color(0xFF7FB5AF),
       ),
       validator: validatorConstrutivo,
-      controller: FormController,
+      controller: formController,
     );
   }
 }

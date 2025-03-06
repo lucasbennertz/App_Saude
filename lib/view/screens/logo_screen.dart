@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/view/screens/caminho_class.dart';
 
+// ignore: must_be_immutable
 class LogoScreen extends StatefulWidget {
   LogoScreen({super.key});
   CaminhoClass tela = CaminhoClass();
@@ -10,6 +11,7 @@ class LogoScreen extends StatefulWidget {
 
   Future<void> direcionarTela(BuildContext context) async {
     Future.delayed(const Duration(seconds: 1), () {
+      // ignore: use_build_context_synchronously
       Navigator.of(context).popAndPushNamed(tela.TELA_INICIAL);
     });
   }

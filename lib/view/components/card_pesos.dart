@@ -22,7 +22,7 @@ class CardPesos extends StatelessWidget {
         trailing: IconButton(
           onPressed: () {
             // Chama o método de exclusão no banco de dados
-            banco.deleteInfoPeso(infoPeso.peso_ID);
+            banco.deleteInfoPeso(infoPeso.pesoID);
             // Chama o callback para atualizar a lista
             onDelete();
           },
@@ -33,7 +33,7 @@ class CardPesos extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Altura: ${infoPeso.altura} m"),
-            Text("IMC: ${infoPeso.calcularIMC().toStringAsFixed(2)}"), // Chama o método para calcular o IMC
+            Text("IMC: ${infoPeso.calcularimc().toStringAsFixed(2)}"), // Chama o método para calcular o IMC
             Text("Data: ${infoPeso.data.toLocal().toString().split(' ')[0]}"), // Exibe apenas a data (sem a hora)
           ],
         ),

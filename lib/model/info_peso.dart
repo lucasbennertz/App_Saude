@@ -1,15 +1,15 @@
 class InfoPeso {
-  int? peso_ID = null;
+  int? pesoID;
   double peso;
   double altura;
   DateTime data = DateTime.now();
-  late double IMC = 0;
+  late double imc = 0;
 
   InfoPeso(this.peso, this.altura);
 
-  double calcularIMC() {
-    IMC = peso / (altura * altura);
-    return IMC;
+  double calcularimc() {
+    imc = peso / (altura * altura);
+    return imc;
   }
 
   Map<String, dynamic> toMap(){
@@ -17,7 +17,7 @@ class InfoPeso {
       'peso' : peso,
       'altura' : altura,
       'data' : data.toIso8601String(),
-      'IMC' : IMC
+      'imc' : imc
     };
   }
 }

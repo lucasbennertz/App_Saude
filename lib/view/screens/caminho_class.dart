@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class CaminhoClass{
       var TELA_LOGO = "/";
       var TELA_INICIAL = "/telaInicial";

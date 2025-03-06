@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:health_application/controller/database.dart';
 import 'package:health_application/controller/regras_validacao_form.dart';
 import 'package:health_application/model/info_peso.dart';
-import 'package:health_application/view/components/MyAppBar.dart';
+import 'package:health_application/view/components/my_app_bar.dart';
 import 'package:health_application/view/components/card_pesos.dart';
-import 'package:health_application/view/components/decoration/MyTextFormFieldWithDecorationForNumbers.dart';
+import 'package:health_application/view/components/decoration/my_text_form_field_with_decoration_for_numbers.dart';
 
 class EntradasLogScreen extends StatefulWidget {
   const EntradasLogScreen({super.key});
@@ -33,7 +33,6 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
 
   void carregarPesos() async{
     pesos = await banco.getInfoPesos();
-    print("pesos carregados");
     setState(() {
     pesos = pesos.reversed.toList();
     });
@@ -55,7 +54,7 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
                 MyTextFormFieldWithDecorationForNumbers(
                   validatorConstrutivo: (value) => regritas.validarPeso(value!),
                   titulo: "Insira seu peso",
-                  FormController: _pesoController,
+                  formController: _pesoController,
                 ),
 
                 SizedBox(height: 12),
@@ -64,7 +63,7 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
                 MyTextFormFieldWithDecorationForNumbers(
                     validatorConstrutivo: (value) => regritas.validarAltura(value!),
                     titulo: "Insira sua altura",
-                    FormController: _alturaController),
+                    formController: _alturaController),
 
                 SizedBox(height: 12),
 
@@ -95,7 +94,7 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
                 ),
                 SizedBox(height: 12), // Adiciona um espaço entre o botão e a lista de dados
 
-                // Usando ListView.builder para exibir os dados
+                // ignore: sized_box_for_whitespace
                 Container(
                   height: MediaQuery.of(context).size.height * 0.68, // Defina a altura fixa ou use MediaQuery para dinamicamente adaptar
                   child: ListView.builder(
