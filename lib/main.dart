@@ -10,16 +10,16 @@ void main() {
 
 class MainApp extends StatelessWidget {
   MainApp({super.key});
-  Telas telas = Telas();
+  CaminhoClass caminhos = CaminhoClass();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        telas.TELA_LOGO: (context) => LogoScreen(),
-        telas.TELA_INICIAL: (context) => MainPage(),
-        telas.TELA_ENTRADA_DADOS: (context) => EntradasLogScreen(),
+        caminhos.TELA_LOGO: (context) => LogoScreen(),
+        caminhos.TELA_INICIAL: (context) => MainPage(),
+        caminhos.TELA_ENTRADA_DADOS: (context) => EntradasLogScreen(),
       },
     );
   }

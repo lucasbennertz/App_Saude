@@ -4,7 +4,7 @@ import 'package:health_application/view/screens/caminho_class.dart';
 
 class CardSaude extends StatelessWidget {
   final InfoSaude saude;
-  final Telas telas;
+  final CaminhoClass telas;
   const CardSaude({required this.saude, required this.telas, super.key});
 
   @override

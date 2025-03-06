@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/controller/data.dart';
+import 'package:health_application/view/components/MyAppBar.dart';
 import 'package:health_application/view/components/card_boas_vindas.dart';
 import 'package:health_application/view/components/card_saude.dart';
 import 'package:health_application/view/screens/caminho_class.dart';
@@ -10,17 +11,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF7FB5AF),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset("assets/images/Instant_SOS.png", height: 55),
-            Text("InstantSOS"),
-            CircleAvatar(),
-          ],
-        ),
-      ),
+      appBar: MyAppBar(title: "InstantSOS"),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -53,9 +44,9 @@ class MainPage extends StatelessWidget {
                         var info = dados.informacoes[index];
                         return CardSaude(
                           saude: info,
-                          telas: Telas(),
-                        ); // Assuming you want to display each item in a custom card
-                      },
+                          telas: CaminhoClass(),
+                        );
+                        },
                     ),
                   ),
                 ],

@@ -3,7 +3,7 @@ import 'package:health_application/view/screens/caminho_class.dart';
 
 class LogoScreen extends StatefulWidget {
   LogoScreen({super.key});
-  Telas tela = Telas();
+  CaminhoClass tela = CaminhoClass();
 
   @override
   State<LogoScreen> createState() => _LogoScreenState();

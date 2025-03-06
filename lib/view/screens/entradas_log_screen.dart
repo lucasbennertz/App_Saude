@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_application/controller/database.dart';
 import 'package:health_application/controller/regras_validacao_form.dart';
 import 'package:health_application/model/info_peso.dart';
+import 'package:health_application/view/components/MyAppBar.dart';
 import 'package:health_application/view/components/card_pesos.dart';
 
 class EntradasLogScreen extends StatefulWidget {
@@ -39,18 +40,7 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Color(0xFF7FB5AF),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset("assets/images/Instant_SOS.png", height: 55),
-            Text("Acompanhe seu histórico"),
-            CircleAvatar(),
-          ],
-        ),
-      ),
+      appBar: MyAppBar(title: "Acompanhe seu peso"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
