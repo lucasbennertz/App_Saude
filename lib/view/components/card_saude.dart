@@ -13,6 +13,8 @@ class CardSaude extends StatelessWidget {
       onTap: () {
         if (saude.idInfoSaude == 4) {
           Navigator.of(context).pushNamed(telas.TELA_ENTRADA_DADOS);
+        }else{
+          Navigator.of(context).pushNamed(telas.TELA_INFORMACOES, arguments: saude);
         }
       },
       child: Padding(
