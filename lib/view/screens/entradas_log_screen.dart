@@ -4,6 +4,7 @@ import 'package:health_application/controller/regras_validacao_form.dart';
 import 'package:health_application/model/info_peso.dart';
 import 'package:health_application/view/components/MyAppBar.dart';
 import 'package:health_application/view/components/card_pesos.dart';
+import 'package:health_application/view/components/decoration/MyTextFormFieldWithDecorationForNumbers.dart';
 
 class EntradasLogScreen extends StatefulWidget {
   const EntradasLogScreen({super.key});
@@ -49,34 +50,22 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                
                 // Campo de Peso
-                TextFormField(
-                  controller: _pesoController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    labelText: "Insira seu peso",
-                    focusColor: Color(0xFF7FB5AF),
-                  ),
-                  validator: (value) => regritas.validarPeso(value!),
-                  keyboardType: TextInputType.number,
+                MyTextFormFieldWithDecorationForNumbers(
+                  validatorConstrutivo: (value) => regritas.validarPeso(value!),
+                  titulo: "Insira seu peso",
+                  FormController: _pesoController,
                 ),
+
                 SizedBox(height: 12),
 
                 // Campo de Altura
-                TextFormField(
-                  controller: _alturaController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    labelText: "Insira sua altura",
-                    focusColor: Color(0xFF7FB5AF),
-                  ),
-                  validator: (value) => regritas.validarAltura(value!),
-                  keyboardType: TextInputType.number,
-                ),
+                MyTextFormFieldWithDecorationForNumbers(
+                    validatorConstrutivo: (value) => regritas.validarAltura(value!),
+                    titulo: "Insira sua altura",
+                    FormController: _alturaController),
+
                 SizedBox(height: 12),
 
                 // Botão de Enviar
