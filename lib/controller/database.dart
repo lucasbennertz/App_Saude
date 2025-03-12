@@ -1,3 +1,4 @@
+import 'package:health_application/model/info_sintoma.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'dart:async';
@@ -37,6 +38,41 @@ class DatabaseHelper {
         IMC REAL
       )
     ''');
+    await db.execute('''
+    CREATE TABLE sintomas (
+      sintoma_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      sintoma TEXT,
+      dataSintoma TEXT
+    )
+    ''');
+  }
+
+  Future<int> insertInfoSintoma(InfoSintoma infoSintoma) async{
+    final db = await database;
+    return await db.insert('sintomas',
+        infoSintoma.toMap()
+    );
+  }
+  Future<List<InfoSintoma>> getInfoSintoma() async{
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('sintomas');
+    
+    return List.generate(maps.length,
+        (i){
+      return InfoSintoma(
+        maps[i]['sintoma'],
+      ) ..sintomaId = maps[i]['sintoma_id']
+        ..sintoma = maps[i]['sintoma']
+        ..data = DateTime.parse(maps[i]['dataSintoma']);
+        });
+  }
+  Future<int> deleteInfoSintoma(int? id) async {
+    final db = await database;
+    return await db.delete(
+      'sintomas',
+      where: 'sintoma_id = ?',
+      whereArgs: [id],
+    );
   }
 
   // Inserir um novo InfoPeso no banco de dados

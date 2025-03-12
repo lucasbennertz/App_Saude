@@ -20,4 +20,10 @@ class RegrasValidacaoForm {
     }
     return null;
   }
+  validarSintoma(String value){
+    if(value.isEmpty){
+      return "Por favor, insira seu sintoma";
+    }
+    return null;
+  }
 }

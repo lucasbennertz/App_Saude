@@ -11,8 +11,8 @@ class CardSaude extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (saude.idInfoSaude == 4) {
-          Navigator.of(context).pushNamed(telas.TELA_ENTRADA_DADOS);
+        if (saude.idInfoSaude == 4 || saude.idInfoSaude == 6) {
+          Navigator.of(context).pushNamed(telas.TELA_ENTRADA_DADOS, arguments: saude.idInfoSaude);
         }else{
           Navigator.of(context).pushNamed(telas.TELA_INFORMACOES, arguments: saude);
         }
