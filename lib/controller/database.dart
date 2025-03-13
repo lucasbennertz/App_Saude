@@ -24,11 +24,13 @@ class DatabaseHelper {
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'info_peso.db');
 
-    return await openDatabase(path, version: 1, onCreate: _onCreate);
+    return await openDatabase(path, version: 2, onCreate: _onCreate);
+
   }
 
   // Criação da tabela no banco de dados
   Future<void> _onCreate(Database db, int version) async {
+
     await db.execute('''
       CREATE TABLE users (
         peso_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,13 +40,13 @@ class DatabaseHelper {
         IMC REAL
       )
     ''');
-    await db.execute('''
+    await db.execute(''' 
     CREATE TABLE sintomas (
       sintoma_id INTEGER PRIMARY KEY AUTOINCREMENT,
       sintoma TEXT,
       dataSintoma TEXT
     )
-    ''');
+  ''');
   }
 
   Future<int> insertInfoSintoma(InfoSintoma infoSintoma) async{
@@ -62,7 +64,6 @@ class DatabaseHelper {
       return InfoSintoma(
         maps[i]['sintoma'],
       ) ..sintomaId = maps[i]['sintoma_id']
-        ..sintoma = maps[i]['sintoma']
         ..data = DateTime.parse(maps[i]['dataSintoma']);
         });
   }

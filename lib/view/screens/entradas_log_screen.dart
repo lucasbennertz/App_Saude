@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:health_application/controller/database.dart';
 import 'package:health_application/controller/regras_validacao_form.dart';
@@ -6,9 +5,10 @@ import 'package:health_application/model/info_peso.dart';
 import 'package:health_application/model/info_sintoma.dart';
 import 'package:health_application/view/components/card_sintomas.dart';
 import 'package:health_application/view/components/decoration/my_text_form_field_with_decoration_for_text.dart';
+import 'package:health_application/view/components/input_peso.dart';
+import 'package:health_application/view/components/input_sintomas.dart';
 import 'package:health_application/view/components/my_app_bar.dart';
 import 'package:health_application/view/components/card_pesos.dart';
-import 'package:health_application/view/components/decoration/my_text_form_field_with_decoration_for_numbers.dart';
 
 class EntradasLogScreen extends StatefulWidget {
   const EntradasLogScreen({super.key});
@@ -50,6 +50,7 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)!.settings.arguments.toString();
@@ -65,24 +66,8 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 telaPeso
-                    ? Column(
-                  children: [
-                    MyTextFormFieldWithDecorationForNumbers(
-                      validatorConstrutivo: (value) => regritas.validarPeso(value!),
-                      titulo: "Insira seu peso",
-                      formController: _pesoController,
-                    ),
-                    SizedBox(height: 12),
-                    MyTextFormFieldWithDecorationForNumbers(
-                        validatorConstrutivo: (value) => regritas.validarAltura(value!),
-                        titulo: "Insira sua altura",
-                        formController: _alturaController),
-                  ],
-                )
-                    : MyTextFormFieldWithDecorationForText(
-                    validatorConstrutivo: (value) => regritas.validarSintoma(value!),
-                    titulo: "Insira aqui seu sintoma",
-                    formController: _sintomaControlle),
+                    ? InputPeso(alturaController: _alturaController, pesoController: _pesoController)
+                    : InputSintomas(sintomaController: _sintomaControlle),
                 SizedBox(height: 12),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -118,47 +103,28 @@ class _EntradasLogScreenState extends State<EntradasLogScreen> {
                   child: Text("Enviar dados"),
                 ),
                 SizedBox(height: 12),
-                telaPeso
-                    ? Container(
+                SizedBox(
                   height: MediaQuery.of(context).size.height * 0.68,
                   child: ListView.builder(
-                    itemCount: pesos.length,
+                    itemCount: telaPeso ? pesos.length : sintomas.length,
                     itemBuilder: (context, index) {
-                      return CardPesos(
-                        infoPeso: pesos[index],
-                        banco: banco,
-                        onDelete: () {
-                          setState(() {
-                            carregarPesos();
-                          });
+                      return telaPeso ? CardPesos(infoPeso: pesos[index], banco: banco, onDelete: (){
+                        setState(() {
+                        carregarPesos();
+                      });
+                        }
+                      )
+                              : CardSintomas(infoSintoma: sintomas[index], banco: banco, onDelete: (){ setState(() {
+                                carregarSintomas();
+                              });});
                         },
-                      );
-                    },
+                      )
                   ),
-                )
-                    : Container(
-                  height: MediaQuery.of(context).size.height * 0.68,
-                  child: ListView.builder(
-                    itemCount: sintomas.length,
-                    itemBuilder: (context, index) {
-                      return CardSintomas(
-                        infoSintoma: sintomas[index],
-                        banco: banco,
-                        onDelete: () {
-                          setState(() {
-                            carregarPesos();
-                          });
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ],
+                ]),
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
   @override
