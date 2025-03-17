@@ -27,7 +27,7 @@ class CardSintomas extends StatelessWidget {
             // Chama o callback para atualizar a lista
             onDelete();
           },
-          icon: Icon(Icons.restore_from_trash),
+          icon: Icon(Icons.delete),
         ),
         title: Text("${infoSintoma.sintoma}"),
         subtitle: Column(
