@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:health_application/view/screens/caminho_class.dart';
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({super.key, required this.title});
+  MyAppBar({super.key, required this.title});
   final String title;
-
+  final CaminhoClass caminhos = CaminhoClass();
   @override
   Size get preferredSize {
     return Size(double.infinity, 60);
@@ -22,7 +23,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           Image.asset("assets/images/Instant_SOS.png", height: 55),
           Text(title),
-          const CircleAvatar(),
+          InkWell(child: CircleAvatar(), onTap: () => Navigator.of(context).pushNamed(caminhos.TELA_LOGIN),),
         ],
       ),
       toolbarHeight: screenHeight * 0.10,

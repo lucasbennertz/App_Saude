@@ -13,6 +13,8 @@ dependencies:
   path_provider:
   sqflite:  
   intl:
+  firebase_core:
+  firebase_database:
 dev_dependencies:
   flutter_test:
     sdk: flutter

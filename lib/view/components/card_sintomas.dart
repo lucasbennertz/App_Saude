@@ -29,7 +29,7 @@ class CardSintomas extends StatelessWidget {
           },
           icon: Icon(Icons.delete),
         ),
-        title: Text("${infoSintoma.sintoma}"),
+        title: Text(infoSintoma.sintoma),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

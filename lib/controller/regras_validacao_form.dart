@@ -26,4 +26,11 @@ class RegrasValidacaoForm {
     }
     return null;
   }
+  validarUsuario(String value){
+    if(value.isEmpty){
+      return "Por favor, insira seu usuario";
+    }
+    return null;
+  }
+
 }
