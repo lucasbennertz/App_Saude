@@ -12,7 +12,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final RegrasValidacaoForm regras = RegrasValidacaoForm();
   TextEditingController _userController = TextEditingController();
-  
+  bool userCadastro = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 160,),
+              SizedBox(height: 120,),
               Image.asset("assets/images/Instant_SOS.png", height: 230),
               SizedBox(height: 30,),
               Container(
@@ -47,10 +48,43 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+              userCadastro ?
+              Column(
+                children: [
+                  SizedBox(height: 16,),
+                  Container(
+                    decoration: BoxDecoration(color: Color(0xffd2d2e3), borderRadius: BorderRadius.circular(18)),
+                    child: TextFormField(
+                      validator: (value) => regras.validarUsuario(value!),
+                      decoration: InputDecoration(
+                          label: Text("Nome"),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(18))
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16,),
+                  Container(
+                    decoration: BoxDecoration(color: Color(0xffd2d2e3), borderRadius: BorderRadius.circular(18)),
+                    child: TextFormField(
+                      validator: (value) => regras.validarUsuario(value!),
+                      decoration: InputDecoration(
+                          label: Text("Data de Nascimento"),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(18))
+                      ),
+                    ),
+                  ),
+                ],
+              ):Container(),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton(onPressed: (){}, child: Text("Novo? Cadastre-se")),
+                  TextButton(onPressed: (){
+                    setState(() {
+                      userCadastro = !userCadastro;
+                    });
+
+                  }, child: Text(userCadastro ? "Entrar em uma conta" :"Novo? Cadastre-se")),
                   TextButton(onPressed: (){}, child: Text("Esqueci minha senha"))
                 ],
               )
