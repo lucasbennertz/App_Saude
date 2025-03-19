@@ -13,7 +13,8 @@ dependencies:
   path_provider:
   sqflite:  
   intl:
-  supabase_flutter: ^2.8.4
+  mysql1:
+  flutter_dotenv:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -23,6 +24,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - .env
     - assets/images/Imagem-relaxante.png
     - assets/images/Instant_SOS.png
   
