@@ -4,12 +4,19 @@ import 'package:health_application/view/screens/entradas_log_screen.dart';
 import 'package:health_application/view/screens/login_screen.dart';
 import 'package:health_application/view/screens/logo_screen.dart';
 import 'package:health_application/view/screens/main_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'view/screens/caminho_class.dart';
 
-void main() {
+const supabaseKey = String.fromEnvironment();
+
+void main() async{
+  await Supabase.initialize(
+    url: 'https://jemzndqjndokhwkxklwf.supabase.co',
+    anonKey: 'public-anon-key',
+  );
   runApp(MainApp());
 }
-
+final supabase = Supabase.instance.client;
 // ignore: must_be_immutable
 class MainApp extends StatelessWidget {
   MainApp({super.key});

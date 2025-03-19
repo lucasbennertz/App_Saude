@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/controller/regras_validacao_form.dart';
-import 'package:health_application/view/components/decoration/my_text_form_field_with_decoration_for_text.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
   
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -11,7 +10,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final RegrasValidacaoForm regras = RegrasValidacaoForm();
-  TextEditingController _userController = TextEditingController();
   bool userCadastro = false;
 
   @override
