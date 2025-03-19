@@ -7,12 +7,12 @@ import 'package:health_application/view/screens/main_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'view/screens/caminho_class.dart';
 
-const supabaseKey = String.fromEnvironment();
-
+const supabaseKey = String.fromEnvironment("SUPABASE_KEY");
+const supabaseUrl = String.fromEnvironment("SUPABASE_URL");
 void main() async{
   await Supabase.initialize(
-    url: 'https://jemzndqjndokhwkxklwf.supabase.co',
-    anonKey: 'public-anon-key',
+    url: supabaseUrl,
+    anonKey: supabaseKey,
   );
   runApp(MainApp());
 }
