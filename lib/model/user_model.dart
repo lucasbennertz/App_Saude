@@ -1,17 +1,20 @@
 class UserModel{
   int? id;
-  String name;
+  String nome;
   String email;
-  String dataNasc;
   String senha;
-  UserModel(this.id, this.name, this.email, this.dataNasc, this.senha);
-  UserModel.semId( this.name, this.email, this.dataNasc, this.senha);
+  String dataNasc;
+  UserModel.semId(this.nome, this.email, this.senha,this.dataNasc);
+  UserModel(this.id, this.nome, this.email, this.senha, this.dataNasc);
+
   Map<String, dynamic> toMap(){
     return {
-      "nameuser" : name,
-      "emailuser" : email,
-      "datanasc" : dataNasc,
-      "passuser" : senha
+      "idUser" : id,
+      "nameUser" : nome,
+      "emailUser" : email,
+      "passUser" : senha,
+      "birthUser" : dataNasc
     };
   }
+
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/controller/regras_validacao_form.dart';
 import 'package:health_application/model/user_model.dart';
-
+import '../../controller/mysql_database.dart';
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-  
+  LoginScreen({super.key});
+
+
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -12,10 +14,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final RegrasValidacaoForm regras = RegrasValidacaoForm();
   bool userCadastro = false;
+  MysqlDatabase database = MysqlDatabase();
   TextEditingController _emailController = TextEditingController();
-  TextEditingController _senhaController = TextEditingController();
-  TextEditingController _nomeController = TextEditingController();
-  TextEditingController _dataNascController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _passController = TextEditingController();
+  TextEditingController _birthController = TextEditingController();
+  @override
+  void initState(){
+    super.initState();
+    database.initDatabase();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 decoration: BoxDecoration(color: Color(0xffd2d2e3), borderRadius: BorderRadius.circular(18)),
                 child: TextFormField(
-                  controller: _senhaController,
+                  controller: _passController,
                   validator: (value) => regras.validarUsuario(value!),
                   decoration: InputDecoration(
                       label: Text("Senha"),
@@ -52,7 +60,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-
               userCadastro ?
               Column(
                 children: [
@@ -60,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     decoration: BoxDecoration(color: Color(0xffd2d2e3), borderRadius: BorderRadius.circular(18)),
                     child: TextFormField(
-                      controller: _nomeController,
+                      controller: _nameController,
                       validator: (value) => regras.validarUsuario(value!),
                       decoration: InputDecoration(
                           label: Text("Nome"),
@@ -72,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     decoration: BoxDecoration(color: Color(0xffd2d2e3), borderRadius: BorderRadius.circular(18)),
                     child: TextFormField(
-                      controller: _dataNascController,
+                      controller: _birthController,
                       validator: (value) => regras.validarUsuario(value!),
                       decoration: InputDecoration(
                           label: Text("Data de Nascimento"),
@@ -84,9 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ):Container(),
               SizedBox(height: 16,),
               ElevatedButton(onPressed: (){
-
-              }, child: userCadastro ? Text("Cadastrar") : Text("Logar")),
-  
+                var newUser = UserModel.semId(_nameController.text, _emailController.text, _passController.text, _birthController.text);
+                database.insertUser(newUser);
+              }, child: userCadastro ? Text("cadastrar") : Text("Logar")),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
