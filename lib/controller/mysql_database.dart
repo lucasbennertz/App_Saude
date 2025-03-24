@@ -1,32 +1,98 @@
 import 'package:health_application/model/user_model.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-class MysqlDatabase{
-var conn;
 
-  initDatabase() async{
+class MysqlDatabase {
+  MySqlConnection? conn;
+
+  Future<void> initDatabase() async {
     await dotenv.load();
-     var setting = ConnectionSettings(
-       host: dotenv.env['DB_HOST']!,
-       port: 26830,
-       user: dotenv.env['DB_USER']!,
-       password: dotenv.env['DB_PASS']!,
-       db: dotenv.env['DB_DATABASE']!
-     );
-     conn = await MySqlConnection.connect(setting);
-     print("estamos conectados");
-     conn.query('''CREATE TABLE if NOT exists users(
-         idUser INT AUTO_INCREMENT PRIMARY KEY,
-         nameUser VARCHAR(40),
-    emailUser VARCHAR(100) NOT NULL,
-    passUser VARCHAR(16) NOT null,
-    birthUser VARCHAR(12)
-    );''');
+    var settings = ConnectionSettings(
+      host: dotenv.env['DB_HOST']!,
+      port: int.parse(dotenv.env['DB_PORT']!),
+      user: dotenv.env['DB_USER']!,
+      password: dotenv.env['DB_PASS']!,
+      db: dotenv.env['DB_DATABASE']!,
+    );
 
+    conn = await MySqlConnection.connect(settings);
+    print("Database connected");
+
+    await conn?.query('''
+      CREATE TABLE IF NOT EXISTS users (
+        idUser INT AUTO_INCREMENT PRIMARY KEY,
+        nameUser VARCHAR(40),
+        emailUser VARCHAR(100) NOT NULL UNIQUE,
+        passUser VARCHAR(16) NOT NULL,
+        birthUser VARCHAR(12)
+      );
+    ''');
   }
-  insertUser(UserModel user) async{
-   conn.query('''INSERT INTO users(nameUser, emailUser,passUser, birthUser) VALUES
-     ('${user.nome}','${user.email}', '${user.senha}', '${user.dataNasc}');''');
-   print("usuario cadastrado");
+
+  Future<void> insertUser(UserModel user) async {
+    if (conn == null) {
+      print("Database connection not initialized");
+      return;
+    }
+
+    await conn?.query(
+      'INSERT INTO users (nameUser, emailUser, passUser, birthUser) VALUES (?, ?, ?, ?)',
+      [user.nome, user.email, user.senha, user.dataNasc],
+    );
+
+    print("User registered");
+  }
+
+  Future<bool> verificarCredenciais(String email, String senha) async {
+    if (conn == null) {
+      print("Database connection not initialized");
+      return false;
+    }
+
+    var result = await conn?.query(
+      'SELECT passUser FROM users WHERE emailUser = ?',
+      [email],
+    );
+
+    if (result != null && result.isNotEmpty) {
+      var senhaBanco = result.first[0]; // Obtém a senha do banco
+
+      if (senhaBanco == senha) {
+        print("Login bem-sucedido!");
+        return true;
+      } else {
+        print("Senha incorreta.");
+        return false;
+      }
+    } else {
+      print("Usuário não encontrado.");
+      return false;
+    }
+  }
+  Future<bool> verificarSeTemUsuario(String email) async {
+  if (conn == null) {
+    print("Database connection not initialized");
+    return false;
+  }
+
+  var result = await conn?.query(
+    'SELECT COUNT(*) FROM users WHERE emailUser = ?',
+    [email],
+  );
+
+  if (result != null && result.isNotEmpty) {
+    int count = result.first[0] as int; // Obtém o número de registros encontrados
+    return count > 0;
+  }
+
+  return false;
+}
+
+
+  Future<void> closeDatabase() async {
+    if (conn != null) {
+      await conn?.close();
+      print("Database connection closed");
+    }
   }
 }

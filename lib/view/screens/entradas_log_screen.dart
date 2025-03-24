@@ -4,7 +4,6 @@ import 'package:health_application/controller/regras_validacao_form.dart';
 import 'package:health_application/model/info_peso.dart';
 import 'package:health_application/model/info_sintoma.dart';
 import 'package:health_application/view/components/card_sintomas.dart';
-import 'package:health_application/view/components/decoration/my_text_form_field_with_decoration_for_text.dart';
 import 'package:health_application/view/components/input_peso.dart';
 import 'package:health_application/view/components/input_sintomas.dart';
 import 'package:health_application/view/components/my_app_bar.dart';
