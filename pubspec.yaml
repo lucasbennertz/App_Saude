@@ -15,6 +15,7 @@ dependencies:
   intl:
   mysql1:
   flutter_dotenv:
+  provider:
 dev_dependencies:
   flutter_test:
     sdk: flutter

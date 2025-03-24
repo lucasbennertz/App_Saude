@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CardBoasVindas extends StatelessWidget {
-  const CardBoasVindas({super.key});
-
+  const CardBoasVindas({super.key, required this.nome});
+  final String nome;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +23,7 @@ class CardBoasVindas extends StatelessWidget {
                       Row(
                         children: [
                           Text("Seja bem vindo ", style: TextStyle(fontSize: 20)),
-                          Text("Fulana(o)!", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(nome, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         ],
                       ),
                       Text("Em que podemos ajuda-lo hoje?"),

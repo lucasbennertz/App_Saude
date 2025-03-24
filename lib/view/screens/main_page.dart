@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/controller/data.dart';
+import 'package:health_application/model/user_model.dart';
 import 'package:health_application/view/components/my_app_bar.dart';
 import 'package:health_application/view/components/card_boas_vindas.dart';
 import 'package:health_application/view/components/card_saude.dart';
 import 'package:health_application/view/screens/caminho_class.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
   static Data dados = Data();
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<UserModel>(builder: (context, value, child) {
+      return Scaffold(
       appBar: MyAppBar(title: "InstantSOS"),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CardBoasVindas(),
+            CardBoasVindas(nome: value.nome,),
             SizedBox(height: 12),
             ClipRRect(
               borderRadius: BorderRadius.only(
@@ -55,6 +59,7 @@ class MainPage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ); 
+    },);
   }
 }

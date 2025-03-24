@@ -95,4 +95,35 @@ class MysqlDatabase {
       print("Database connection closed");
     }
   }
+  Future<UserModel?> buscarUsuarioPorEmail(String email) async {
+  if (conn == null) {
+    print("Database connection not initialized");
+    return null;
+  }
+
+  try {
+    var results = await conn!.query(
+      'SELECT nameUser, emailUser, passUser, birthUser FROM users WHERE emailUser = ?',
+      [email]
+    );
+
+    if (results.isNotEmpty) {
+      var row = results.first;
+
+      return UserModel.semId(
+        row['nameUser'] ?? '',   // Garante que não seja null
+        row['emailUser'] ?? '',  // Garante que não seja null
+        row['passUser'] ?? '',   // Garante que não seja null
+        row['birthUser'] ?? '',  // Garante que não seja null
+      );
+    } else {
+      return null; // Usuário não encontrado
+    }
+  } catch (e) {
+    print("Erro ao buscar usuário por email: $e");
+    return null;
+  }
+}
+
+
 }

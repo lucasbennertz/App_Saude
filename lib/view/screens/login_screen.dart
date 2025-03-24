@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_application/controller/regras_validacao_form.dart';
 import 'package:health_application/model/user_model.dart';
+import 'package:provider/provider.dart';
 import '../../controller/mysql_database.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,59 +15,83 @@ class _LoginScreenState extends State<LoginScreen> {
   final RegrasValidacaoForm regras = RegrasValidacaoForm();
   bool userCadastro = false;
   MysqlDatabase database = MysqlDatabase();
-  
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _birthController = TextEditingController();
-
+  
   @override
   void initState() {
     super.initState();
     database.initDatabase();
   }
 
-  Future<void> _cadastrarUsuario() async {
-    String email = _emailController.text;
-    String senha = _passController.text;
-    String nome = _nameController.text;
-    String dataNasc = _birthController.text;
+ Future<void> _cadastrarUsuario() async {
+  final userProvider = Provider.of<UserModel>(context, listen: false);
+  String email = _emailController.text;
+  String senha = _passController.text;
+  String nome = _nameController.text;
+  String dataNasc = _birthController.text;
 
-    bool usuarioExiste = await database.verificarSeTemUsuario(email);
+  bool usuarioExiste = await database.verificarSeTemUsuario(email);
+  
+  if (usuarioExiste) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Usuário já cadastrado!"), duration: Duration(seconds: 2))
+    );
+  } else {
+    var newUser = UserModel.semId(nome, email, senha, dataNasc);
+    await database.insertUser(newUser);
     
-    if (usuarioExiste) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Usuário já cadastrado!"), duration: Duration(seconds: 2))
-      );
-    } else {
-      var newUser = UserModel.semId(nome, email, senha, dataNasc);
-      await database.insertUser(newUser);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Cadastro realizado com sucesso!"), duration: Duration(seconds: 2))
-      );
-      setState(() {
-        userCadastro = false;
-      });
-    }
+    // Atualiza o estado do Provider
+    userProvider.nome = newUser.nome;
+    userProvider.email = newUser.email;
+    userProvider.senha = newUser.senha;
+    userProvider.dataNasc = newUser.dataNasc;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Cadastro realizado com sucesso!"), duration: Duration(seconds: 2))
+    );
+
+    setState(() {
+      userCadastro = false;
+    });
   }
+}
 
   Future<void> _loginUsuario() async {
-    String email = _emailController.text;
-    String senha = _passController.text;
+  final userProvider = Provider.of<UserModel>(context, listen: false);
+  String email = _emailController.text;
+  String senha = _passController.text;
 
-    bool credenciaisCorretas = await database.verificarCredenciais(email, senha);
-    
-    if (credenciaisCorretas) {
+  bool credenciaisCorretas = await database.verificarCredenciais(email, senha);
+
+  if (credenciaisCorretas) {
+    // Busca os dados completos do usuário no banco de dados
+    UserModel? user = await database.buscarUsuarioPorEmail(email);
+
+    if (user != null) {
+      userProvider.nome = user.nome;
+      userProvider.email = user.email;
+      userProvider.senha = user.senha;
+      userProvider.dataNasc = user.dataNasc;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Login bem-sucedido!"), duration: Duration(seconds: 2))
       );
+
       // TODO: Navegar para a próxima tela
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Email ou senha incorretos."), duration: Duration(seconds: 2))
+        SnackBar(content: Text("Erro ao recuperar dados do usuário."), duration: Duration(seconds: 2))
       );
     }
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Email ou senha incorretos."), duration: Duration(seconds: 2))
+    );
   }
+}
 
   @override
   Widget build(BuildContext context) {
