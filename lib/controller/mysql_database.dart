@@ -1,10 +1,11 @@
 import 'package:health_application/model/user_model.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 
 class MysqlDatabase {
   MySqlConnection? conn;
-
   Future<void> initDatabase() async {
     await dotenv.load();
     var settings = ConnectionSettings(
@@ -109,13 +110,14 @@ class MysqlDatabase {
 
     if (results.isNotEmpty) {
       var row = results.first;
-
-      return UserModel.semId(
+      var nameUser = row['nameUser'] ?? '';
+      var newUser = UserModel.semId(
         row['nameUser'] ?? '',   // Garante que não seja null
         row['emailUser'] ?? '',  // Garante que não seja null
         row['passUser'] ?? '',   // Garante que não seja null
         row['birthUser'] ?? '',  // Garante que não seja null
       );
+      return newUser;
     } else {
       return null; // Usuário não encontrado
     }

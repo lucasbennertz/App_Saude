@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:health_application/controller/regras_validacao_form.dart';
 import 'decoration/my_text_form_field_with_decoration_for_numbers.dart';
 
+// ignore: must_be_immutable
 class InputPeso extends StatelessWidget {
   InputPeso({super.key,required this.alturaController,required this.pesoController});
   final RegrasValidacaoForm regritas = RegrasValidacaoForm();

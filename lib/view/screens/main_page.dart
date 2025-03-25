@@ -7,59 +7,63 @@ import 'package:health_application/view/components/card_saude.dart';
 import 'package:health_application/view/screens/caminho_class.dart';
 import 'package:provider/provider.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
   static Data dados = Data();
-  
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserModel>(builder: (context, value, child) {
-      return Scaffold(
+    return Scaffold(
       appBar: MyAppBar(title: "InstantSOS"),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CardBoasVindas(nome: value.nome,),
-            SizedBox(height: 12),
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25),
-              ),
-              child: Stack(
-                children: [
-                  Image.asset(
-                    'assets/images/Imagem-relaxante.png',
-                    width: double.infinity,
-                    height: 750,
-                    fit: BoxFit.cover,
+      body: Consumer<UserModel>(
+        builder: (context, user, child) {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                CardBoasVindas(nome: user.nome),
+                const SizedBox(height: 12),
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics:
-                          NeverScrollableScrollPhysics(), // Disables scrolling here since SingleChildScrollView already does it
-                      itemCount:
-                          dados
-                              .informacoes
-                              .length, // The length of the data list
-                      itemBuilder: (context, index) {
-                        var info = dados.informacoes[index];
-                        return CardSaude(
-                          saude: info,
-                          telas: CaminhoClass(),
-                        );
-                        },
+                  child: Container(
+                    width: double.infinity,
+                    color: Colors.white, // Adicionando um fundo branco para contraste
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          'assets/images/Imagem-relaxante.png',
+                          width: double.infinity,
+                          height: 650, // Reduzi o tamanho da imagem para melhor disposição
+                          fit: BoxFit.cover,
+                        ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: MainPage.dados.informacoes.length,
+                          itemBuilder: (context, index) {
+                            var info = MainPage.dados.informacoes[index];
+                            return CardSaude(
+                              saude: info,
+                              telas: CaminhoClass(),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
-    ); 
-    },);
+    );
   }
 }
