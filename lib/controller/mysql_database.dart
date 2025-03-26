@@ -1,8 +1,6 @@
 import 'package:health_application/model/user_model.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:path/path.dart';
-import 'package:provider/provider.dart';
 
 class MysqlDatabase {
   MySqlConnection? conn;
@@ -110,7 +108,6 @@ class MysqlDatabase {
 
     if (results.isNotEmpty) {
       var row = results.first;
-      var nameUser = row['nameUser'] ?? '';
       var newUser = UserModel.semId(
         row['nameUser'] ?? '',   // Garante que não seja null
         row['emailUser'] ?? '',  // Garante que não seja null

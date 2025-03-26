@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_application/controller/logged_controller.dart';
 import 'package:health_application/controller/regras_validacao_form.dart';
 import 'package:health_application/model/user_model.dart';
 import 'package:provider/provider.dart';
@@ -80,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
         userProvider.senha = user.senha;
         userProvider.dataNasc = user.dataNasc;
 
+        LoggedController.saveUser(user);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Login bem-sucedido!"), duration: Duration(seconds: 2))
         );
@@ -136,6 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }   
                     } else {
                       await _loginUsuario();
+
                     }
                   },
                   child: Text(userCadastro ? "Cadastrar" : "Logar"),
