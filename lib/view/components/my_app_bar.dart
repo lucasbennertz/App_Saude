@@ -22,7 +22,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset("assets/images/Instant_SOS.png", height: 55),
-          Text(title),
+          Text(title, style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),),
           InkWell(child: CircleAvatar(), onTap: () => Navigator.of(context).pushNamed(caminhos.TELA_LOGIN),),
         ],
       ),
