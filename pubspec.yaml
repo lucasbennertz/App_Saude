@@ -23,6 +23,7 @@ dev_dependencies:
   flutter_secure_storage:
   shared_preferences:
   uuid:
+  mask_text_input_formatter:
 flutter:
   uses-material-design: true
   assets:

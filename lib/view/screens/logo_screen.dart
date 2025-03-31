@@ -30,7 +30,7 @@ class _LogoScreenState extends State<LogoScreen> {
     if (!mounted) return;
 
     final userProvider = Provider.of<UserModel>(context, listen: false);
-
+    Future.delayed(Duration(seconds: 2));
     if (user != null) {
       // Atualiza os dados do usuário no provider
       userProvider.atualizarUsuario(

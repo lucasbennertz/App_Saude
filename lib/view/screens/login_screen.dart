@@ -5,6 +5,7 @@ import 'package:health_application/model/user_model.dart';
 import 'package:provider/provider.dart';
 import '../../controller/mysql_database.dart';
 import '../screens/main_page.dart';  // Aqui você importa a tela principal
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -105,6 +106,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final maskFormatter = MaskTextInputFormatter(
+      mask: '##/##/####',
+      filter: {"#": RegExp(r'[0-9]')},
+    );
     return Scaffold(
       backgroundColor: Color(0xFF7FB5AF),
       body: SingleChildScrollView(
@@ -126,7 +131,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 16),
                   _buildTextField("Nome", _nameController, validator: (value) => regras.validarNome(value!),),
                   SizedBox(height: 16),
-                  _buildTextField("Data de Nascimento", _birthController,validator: (value) => regras.validarDatanasc(value!)),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xffd2d2e3),
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: TextFormField(
+                      controller: _birthController,
+                      obscureText: false,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [maskFormatter],
+                      validator: (value) => regras.validarDatanasc(value!),
+                      decoration: InputDecoration(
+                        labelText: "Data de Nascimento",
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
+                      ),
+                    ),
+                  ),
                 ],
             
                 SizedBox(height: 16),
@@ -186,6 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
       obscureText: obscureText,
       validator: validator,  
       decoration: InputDecoration(
+
         labelText: label,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
       ),

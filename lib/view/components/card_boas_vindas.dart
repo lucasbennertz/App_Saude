@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class CardBoasVindas extends StatelessWidget {
   const CardBoasVindas({super.key, required this.nome});
   final String nome;
+
   @override
   Widget build(BuildContext context) {
+    String primeiroNome(String nome){
+      return nome.split(" ").first;
+    }
     return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -23,7 +27,7 @@ class CardBoasVindas extends StatelessWidget {
                       Row(
                         children: [
                           Text("Seja bem vindo ", style: TextStyle(fontSize: 20)),
-                          Text(nome, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(primeiroNome(nome), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         ],
                       ),
                       Text("Em que podemos ajuda-lo hoje?"),
