@@ -24,10 +24,11 @@ dev_dependencies:
   shared_preferences:
   uuid:
   mask_text_input_formatter:
+  just_audio:
 flutter:
   uses-material-design: true
   assets:
     - .env
     - assets/images/Imagem-relaxante.png
     - assets/images/Instant_SOS.png
-  
+    - assets/audios/musica-parada-cardiaca.mp3
