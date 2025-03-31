@@ -29,13 +29,6 @@ class RegrasValidacaoForm {
     }
     return null;
   }
-  //validar se o usuario  esta null
-  validarUsuario(String value){
-    if(value.trim().isEmpty){
-      return "Por favor, insira seu usuario";
-    }
-    return null;
-  }
   //Validar se a senha esta null
   String? validarSenha(String value) {
   value = value.trim();
@@ -68,6 +61,9 @@ class RegrasValidacaoForm {
   // Se a senha for válida, retorna null
   return null;
 }
+
+
+
 
 
   String? validarEmail(String value) {
@@ -130,7 +126,7 @@ class RegrasValidacaoForm {
   // Verifica se o nome contém apenas letras e espaços (sem números ou caracteres especiais)
   String regex = r'^[a-zA-Z\s]+$';
   RegExp regExp = RegExp(regex);
-  
+
   if (!regExp.hasMatch(value)) {
     return "O nome deve conter apenas letras e espaços";
   }
@@ -138,6 +134,11 @@ class RegrasValidacaoForm {
   // Se a validação for bem-sucedida, retorna null
   return null;
 }
+
+  //Validar senha e email
+  validarregrasSenha(String value){
+
+  }
 
 
 }
