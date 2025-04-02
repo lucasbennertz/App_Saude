@@ -43,7 +43,7 @@ class _LogoScreenState extends State<LogoScreen> {
       // Redireciona para a tela inicial
       Navigator.pushReplacementNamed(context, tela.TELA_INICIAL);
     } else {
-      // Redireciona para a tela de login se o usuário não estiver logado
+      // Redireciona para a tela de login se o usuário não estiver logad
       Navigator.pushReplacementNamed(context, tela.TELA_LOGIN);
     }
   }
