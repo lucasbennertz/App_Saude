@@ -7,9 +7,11 @@ import 'package:health_application/view/screens/logo_screen.dart';
 import 'package:health_application/view/screens/main_page.dart';
 import 'view/screens/caminho_class.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async{
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferences.getInstance();
   runApp(ChangeNotifierProvider(
     create: (context) => UserModel(0, "Fulana(o)", "kdlwalkdaw", "0000", "31012008"),
     child: MainApp(),

@@ -1,0 +1,6 @@
+flutter_native_splash:
+  color: "#7FB5AF"
+  image: assets/images/Instant_SOS.png
+  android_gravity: center
+  ios_content_mode: center
+  fullscreen: true

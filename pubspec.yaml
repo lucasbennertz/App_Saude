@@ -11,20 +11,23 @@ dependencies:
     sdk: flutter
   path:
   path_provider:
-  sqflite:  
+  sqflite:
   intl:
   mysql1:
   flutter_dotenv:
   provider:
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^5.0.0
   flutter_secure_storage:
   shared_preferences:
   uuid:
   mask_text_input_formatter:
   just_audio:
+  flutter_native_splash:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
 flutter:
   uses-material-design: true
   assets:
@@ -32,3 +35,10 @@ flutter:
     - assets/images/Imagem-relaxante.png
     - assets/images/Instant_SOS.png
     - assets/audios/musica-parada-cardiaca.mp3
+
+flutter_native_splash:
+  color: "#7FB5AF"
+  image: assets/images/Instant_SOS.png
+  android_gravity: center
+  ios_content_mode: center
+  fullscreen: true

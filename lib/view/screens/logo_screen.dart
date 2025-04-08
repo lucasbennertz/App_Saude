@@ -17,8 +17,10 @@ class _LogoScreenState extends State<LogoScreen> {
   @override
   void initState() {
     super.initState();
-    // Chama a verificação de login e atualização do provider apenas uma vez ao inicializar a tela
-    checkLoginStatus();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      checkLoginStatus();
+    });
+
   }
 
   // Função para verificar se o usuário está logado e atualizar o Provider
@@ -28,9 +30,7 @@ class _LogoScreenState extends State<LogoScreen> {
 
     // Verifica se o widget ainda está montado (para evitar erros de navegação)
     if (!mounted) return;
-
     final userProvider = Provider.of<UserModel>(context, listen: false);
-    Future.delayed(Duration(seconds: 2));
     if (user != null) {
       // Atualiza os dados do usuário no provider
       userProvider.atualizarUsuario(
