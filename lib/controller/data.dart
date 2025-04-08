@@ -18,14 +18,14 @@ class Data {
     InfoSaude(3, "Queimadura", "passo-a-passo para ajudar", [
       "Mantenha a calma",
       "Coloque a queimadura em contato com água corrente",
-      "Entre em contato com o posto de saúde masi próximo"
+      "Entre em contato com o posto de saúde mais próximo"
     ]),
     InfoSaude(4, "Peso", "Acompanhar a perda de peso", []),
     InfoSaude(5, "Parada Cardíaca", "Ritmo manobra de batida", [
       "Mantenha a calma",
       "Deite a pessoa no chão",
       "Posicione-se ao lado da pessoa",
-      "Ponha a mão logo abaixo do fima da caixa toráxica da pessoa",
+      "Ponha a mão logo abaixo do fim da caixa toráxica da pessoa",
       "Faça impulsões para baixo no ritmo da música"
     ]),
     InfoSaude(6, "Diário de Sintomas", "Ponha registros atualizados", [])
