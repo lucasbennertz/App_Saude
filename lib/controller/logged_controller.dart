@@ -5,7 +5,7 @@ import 'dart:convert';
 class LoggedController {
   // ✅ Salvar o Usuário
   static Future<void> saveUser(UserModel user) async {
-    final  prefs = SharedPreferencesAsync();
+    final  prefs = await SharedPreferences.getInstance();
     // Converte o objeto UserModel para um Map
     String userJson = jsonEncode(user.toMap());
 
