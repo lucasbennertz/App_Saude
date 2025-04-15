@@ -17,74 +17,48 @@ class _RespirationScreenState extends State<RespirationScreen> {
   double circleSize = 200;
   int animationSeconds = 2;
 
-  void vibrationControl() async{
-    for(int i = 0; i <= 2; i++) {
-      if (await Vibration.hasVibrator() &&
-          await Vibration.hasAmplitudeControl()) {
-        await vibrar(true);
-      } else if (await Vibration.hasVibrator()) {
-        await vibrar(false);
-      }
-      if (i ==2 ){
-        setState(() {
-          textoRespiracao = "Acabou!";
-        });
-      }
-    }
+  void setTexto(String texto, {double? size, int? seconds}) {
+    if (!mounted) return;
+    setState(() {
+      textoRespiracao = texto;
+      if (size != null) circleSize = size;
+      if (seconds != null) animationSeconds = seconds;
+    });
+  }
+
+  void vibrationControl() async {
+    if (!mounted) return;
+    bool amplitude = await Vibration.hasAmplitudeControl();
+
+    await vibrar(amplitude);
+    if (!mounted) return;
+
+    await vibrar(amplitude);
+    if (!mounted) return;
+
+    await vibrar(amplitude);
+    if (!mounted) return;
+
+    setTexto("Acabou!");
   }
 
   Future<void> vibrar(bool temAmplitude) async {
-    if (temAmplitude) {
-      await Future.delayed(Duration(seconds: 2));
-      setState(() {
-        textoRespiracao = "Inspire";
-        circleSize = 300;
-        animationSeconds = 4;
-      });
+    await Future.delayed(Duration(seconds: 2));
+    if (!mounted) return;
+    setTexto("Inspire", size: 300, seconds: 4);
+    Vibration.vibrate(duration: 500, amplitude: temAmplitude ? 255 : 0);
 
-      Vibration.vibrate(duration: 500, amplitude: 255);
+    await Future.delayed(Duration(seconds: 4));
+    if (!mounted) return;
+    setTexto("Segure");
+    Vibration.vibrate(duration: 500, amplitude: temAmplitude ? 255 : 0);
 
-      await Future.delayed(Duration(seconds: 4));
-      setState(() {
-        textoRespiracao = "Segure";
+    await Future.delayed(Duration(seconds: 7));
+    if (!mounted) return;
+    setTexto("Expire", size: 150, seconds: 7);
+    Vibration.vibrate(duration: 500, amplitude: temAmplitude ? 255 : 0);
 
-      });
-      Vibration.vibrate(duration: 500, amplitude: 255);
-
-      await Future.delayed(Duration(seconds: 7));
-      setState(() {
-        textoRespiracao = "Expire";
-        circleSize = 150;
-        animationSeconds = 7;
-      });
-      Vibration.vibrate(duration: 500, amplitude: 255);
-
-      await Future.delayed(Duration(seconds: 8));
-    } else {
-      await Future.delayed(Duration(seconds: 2));
-      setState(() {
-        textoRespiracao = "Inspire";
-        circleSize = 300;
-        animationSeconds = 4;
-      });
-      Vibration.vibrate(duration: 500);
-
-      await Future.delayed(Duration(seconds: 4));
-      setState(() {
-        textoRespiracao = "Segure";
-      });
-      Vibration.vibrate(duration: 500);
-
-      await Future.delayed(Duration(seconds: 7));
-      setState(() {
-        textoRespiracao = "Expire";
-        circleSize = 150;
-        animationSeconds = 7;
-      });
-      Vibration.vibrate(duration: 500);
-
-      await Future.delayed(Duration(seconds: 8));
-    }
+    await Future.delayed(Duration(seconds: 8));
   }
 
   @override
@@ -92,8 +66,6 @@ class _RespirationScreenState extends State<RespirationScreen> {
     super.initState();
     vibrationControl();
   }
-
-
 
   @override
   void dispose() {
@@ -113,6 +85,7 @@ class _RespirationScreenState extends State<RespirationScreen> {
     saude = args;
     String saudeTitle = saude!.nomeInfoSaude;
     List<String> saudePassos = saude!.passos;
+
     return Scaffold(
       appBar: MyAppBar(title: saudeTitle),
       body: Column(
@@ -129,7 +102,11 @@ class _RespirationScreenState extends State<RespirationScreen> {
               },
             ),
           ),
-          Text(textoRespiracao, style: TextStyle( fontSize: 24, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+          Text(
+            textoRespiracao,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
           Expanded(
             child: AnimatedOpacity(
               opacity: 1.0,
@@ -138,15 +115,15 @@ class _RespirationScreenState extends State<RespirationScreen> {
                 duration: Duration(seconds: animationSeconds),
                 curve: Curves.easeInOut,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.blue.shade200,
+                  shape: BoxShape.circle,
+                  color: Colors.blue.shade200,
                 ),
                 width: circleSize,
                 height: circleSize,
                 alignment: Alignment.center,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

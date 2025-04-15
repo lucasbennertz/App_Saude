@@ -18,8 +18,9 @@ class LoggedController {
     final prefs = await SharedPreferences.getInstance();
     String? userJson = prefs.getString('user_data');
 
+    if (userJson == null) return null;
     // Converte o JSON de volta para o Map e depois para um UserModel
-    Map<String, dynamic> userMap = jsonDecode(userJson!);
+    Map<String, dynamic> userMap = jsonDecode(userJson);
     UserModel user = UserModel(
       userMap['idUser'], // ID do usuário
       userMap['nameUser'],
