@@ -7,4 +7,5 @@ class CaminhoClass{
       var TELA_INFORMACOES = "/telaInformacoes";
       var TELA_LOGIN = "/telaLogin";
       var TELA_ANSIEDADE = "/telaAnsiedade";
+      var TELA_USER_INFOS = "/telaUserInfos";
   }

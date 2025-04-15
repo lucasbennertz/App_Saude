@@ -7,6 +7,7 @@ import 'package:health_application/view/screens/login_screen.dart';
 import 'package:health_application/view/screens/logo_screen.dart';
 import 'package:health_application/view/screens/main_page.dart';
 import 'package:health_application/view/screens/respiration_screen.dart';
+import 'package:health_application/view/screens/user_profile_screen.dart';
 import 'view/screens/caminho_class.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,7 +40,8 @@ class MainApp extends StatelessWidget {
         caminhos.TELA_ENTRADA_DADOS: (context) => EntradasLogScreen(),
         caminhos.TELA_INFORMACOES: (context) => InfosScreens(),
         caminhos.TELA_LOGIN: (context) => LoginScreen(),
-        caminhos.TELA_ANSIEDADE: (context) => RespirationScreen()
+        caminhos.TELA_ANSIEDADE: (context) => RespirationScreen(),
+        caminhos.TELA_USER_INFOS: (context) => UserProfileScreen()
       },
     );
   }
