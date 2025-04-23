@@ -1,13 +1,16 @@
-# InstantSOS aplicativo de consulta em emergências.
+# new_app_saude
 
-* Aplicativo desenvolvido para compor a SA do curso de Flutter do programa +Devs2Blu.
-* Membros do grupo: João Timóteo, Lucas Bennertz e Mariana Azevedo.
+A new Flutter project.
 
-  Este aplicativo (InstantSOS) tem como finalidade servir de "dicionário de emergências" em casos de necessidade, fornecendo auxílio com os primeiros socorros em casos de espera por emergência ou dificuldades de chegar ao hospital, buscamos praticidade no projeto para levar maior confiança para nossos usuários e agilidade na hora de consultar uma determinada doença/caso de saúde que alguém possa vir a possuir.
+## Getting Started
 
-# Tecnologias utilizadas:
-  1. Banco de Dados - PostgreSQL
-  2. Android Studio
-  3. Excel
-  4. Figma
-  5. Github
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

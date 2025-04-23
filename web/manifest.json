@@ -1,6 +1,6 @@
 {
-    "name": "health_application",
-    "short_name": "health_application",
+    "name": "new_app_saude",
+    "short_name": "new_app_saude",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

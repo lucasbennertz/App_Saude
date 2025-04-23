@@ -28,9 +28,9 @@ class _RespirationScreenState extends State<RespirationScreen> {
 
   void vibrationControl() async {
     if (!mounted) return;
-    bool amplitude = await Vibration.hasAmplitudeControl();
+    bool? amplitude = await Vibration.hasAmplitudeControl();
 
-    await vibrar(amplitude);
+    await vibrar(amplitude!);
     if (!mounted) return;
 
     await vibrar(amplitude);
